@@ -17,7 +17,7 @@ public class XmlGenerator {
     }
 
     private StringBuilder writeContent(Iterator<Row> rowIterator) {
-        String beginning = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<table>\n";
+        String beginning = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<content>\n\t<table>\n";
 
         StringBuilder output = new StringBuilder();
 
@@ -28,25 +28,25 @@ public class XmlGenerator {
 
             Iterator<Cell> cellIterator = row.cellIterator();
 
-            output.append("\t<row>\n");
+            output.append("\t\t<row>\n");
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
 
                 switch (cell.getCellType()) {
                     case Cell.CELL_TYPE_BOOLEAN:
-                        output.append("\t\t<cell>" + cell.getBooleanCellValue() + "</cell>\n");
+                        output.append("\t\t\t<cell>" + cell.getBooleanCellValue() + "</cell>\n");
                         break;
                     case Cell.CELL_TYPE_NUMERIC:
-                        output.append("\t\t<cell>" + cell.getNumericCellValue() + "</cell>\n");
+                        output.append("\t\t\t<cell>" + cell.getNumericCellValue() + "</cell>\n");
                         break;
                     case Cell.CELL_TYPE_STRING:
-                        output.append("\t\t<cell>" + cell.getStringCellValue() + "</cell>\n");
+                        output.append("\t\t\t<cell>" + cell.getStringCellValue() + "</cell>\n");
                         break;
                 }
             }
-            output.append("\t</row>\n");
+            output.append("\t\t</row>\n");
         }
-        output.append("</table>");
+        output.append("\t</table>\n</content>");
         return output;
     }
 
